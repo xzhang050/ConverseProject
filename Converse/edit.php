@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
 <title>Converse Online Shop</title>
-	<script type="text/javascript" src="./script/image_change.js">
-	</script>
 	<style>
 		body {font-family:Verdana, Arial, sans-serif;
               background-color: #ffffff;
 }
-		#wrapper { background-color: #ffffff;	
+		#wrapper { background-color: #ffffff;
 				   width: 80%;
 		           margin: auto;
                    min-width:850px;
 		           box-shadow: 10px 10px 5px #888888;
-} 
+}
+		 .container1{background-image: url(./img/cart_background.jpg);
+		             background-repeat: no-repeat;
+		             background-size: 100% 100%;}
+		 .container2 {
+            background-color: rgba(255, 255, 255, 0.8);
+            height: 100%;
+        }
 		header{ background-color: #000000;
-                color: #FFFFFF; 
-                font-size: 150%; 
+                color: #FFFFFF;
+                font-size: 150%;
                 padding-left:35%;
 
 }
@@ -29,7 +34,7 @@
 			background-color: #333;
 }
 		nav li { float: right;
-				 display: inline-block;} 
+				 display: inline-block;}
 		nav li a{
 			display:block;
 			color: white;
@@ -94,7 +99,7 @@ footer{background-color: black;}
   text-decoration: none;
   white-space: nowrap;
   color: #555;
-  
+
   background-color: #ddd;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,1)), to(rgba(255,255,255,0)));
   background-image: -webkit-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
@@ -102,7 +107,7 @@ footer{background-color: black;}
   background-image: -ms-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
   background-image: -o-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
   background-image: linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
-  
+
   -webkit-transition: background-color .2s ease-out;
   -moz-transition: background-color .2s ease-out;
   -ms-transition: background-color .2s ease-out;
@@ -116,7 +121,7 @@ footer{background-color: black;}
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 2px 2px -1px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .3) inset;
   box-shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 2px 2px -1px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .3) inset;
   text-shadow: 0 1px 0 rgba(255,255,255, .9);
-  
+
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -152,6 +157,13 @@ footer{background-color: black;}
   box-shadow: none !important;
   text-shadow: none !important;
 }
+		.container1{background-image: url(./img/index_background.jpg);
+		             background-repeat: no-repeat;
+		             background-size: 100% 100%;}
+		.container2 {
+            background-color: rgba(255, 255, 255, 0.8);
+            height: 100%;
+        }
 	</style>
 </head>
 <body>
@@ -165,46 +177,66 @@ footer{background-color: black;}
 	<li><a href="index.html">HOME</a></li>
 	</ul>
 	</nav>
-	<div>
+	<div class='container1'>
+	<div class='container2'>
 	<table>
-	<form id="addToCart" action="./script/addToCart.php" method="post">
+	<form id="SaveToCart" action="./script/SaveToCart.php" method="post">
 	<tr>
-	<td colspan=3 rowspan=4><img src="./img/firstshoe_1.jpg" width="500px" height="360px" id="large_pic"></td>
-	<td id="shoeName"><u>CHUCK TAYLOR ALL STAR '70 HIGH TOP</u>
-	<input type="hidden" id="ProductId" name="ProductId" value=1>
-	<input type="hidden" id="Price" name="Price" value=119.90>
-	<input type="hidden" id="ProductName" name="ProductName" value="CHUCK TAYLOR ALL STAR '70 HIGH TOP">
-	<input type="hidden" id="Image" name="Image" value="./img/firstshoe_1.jpg"></td>
+	<?php
+    session_start();
+    $key = $_GET["key"];
+    $order = $_SESSION['cart'][$key];
+    $productId = $order[0];
+	$size = $order[1];
+	$servername = "localhost";
+	$username = "f31ee";
+	$password = "f31ee";
+	$dbname = "f31ee";
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+				}
+	$sql = "SELECT * FROM ShoeInfo WHERE ProductID = ".$productId;
+    $result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$name = $row['ProductName'];
+	$price = $row['Price'];
+	$image = $row['ImgAddr']."_1.jpg";
+	echo "<td colspan=3 rowspan=4><img src=$image width='500px' height='360px' id='large_pic'></td>";
+	echo "<td id='shoeName'><u>$name</u>";
+	?>
 	</tr>
 	<tr>
-	<td id="discription">The Converse All Star Chuck '70 is our re-crafted sneaker that uses modern details to celebrate the original Chuck Taylor All Star from the 1970's.</td>
+	<td></td>
 	</tr>
 	<tr>
-	<td>Price:  SGD <b>119.90</b>
-		<br>Colour:  BLACK
-		<br>Size:  <select id="Size" name="Size">  
-					<optgroup>  
-					<option value="35">35</option>  
-					<option value="36">36</option>
-					<option value="37">37</option>  
-					<option value="38">38</option>  
-					<option value="39">39</option>  
-					<option value="40">40</option>  
-					<option value="41">41</option>  
-					<option value="42">42</option>  					
-					</optgroup>  
+	<?php
+	echo "<td>Price:  SGD <b>$price</b>";
+	?>
+		<br>
+		<br>Size:  <select id='Size' name='Size'>
+					<optgroup>
+					<option value=<?php echo $size;?> selected='selected'><?php echo $size;?></option>
+					<option value='35'>35</option>
+					<option value='36'>36</option>
+					<option value='37'>37</option>
+					<option value='38'>38</option>
+					<option value='39'>39</option>
+					<option value='40'>40</option>
+					<option value='41'>41</option>
+					<option value='42'>42</option>
+					</optgroup>
 					</select></td>
+					<?php echo "<input type='hidden' id='key' name='key' value=$key>" ?>
 	</tr>
 	<tr>
-	<td><input class="button" type="submit" value="ADD TO CART"></td>
+	<td><input type='submit' class='button' value='SAVE'></td>
 	</tr>
 	<tr>
-		<td><img src="./img/firstshoe_1.jpg" height="50px" onmouseover="changeImage('./img/firstshoe_1.jpg');"></td>
-		<td><img src="./img/firstshoe_2.jpg" height="50px" onmouseover="changeImage('./img/firstshoe_2.jpg');"></td>
-		<td><img src="./img/firstshoe_3.jpg" height="50px" onmouseover="changeImage('./img/firstshoe_3.jpg');"></td>
 	</tr>
 	</form>
 	</table>
+    </div>
 	</div>
 	<footer>
 	<ul>

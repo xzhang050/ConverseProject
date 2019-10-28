@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 <title>Converse Online Shop</title>
-	<script type="text/javascript" src="./script/image_change.js">
+	<script type="text/javascript">
+	function changeImage(newSource)
+{
+	document.getElementById("large_pic").src = newSource;
+}
 	</script>
 	<style>
 		body {font-family:Verdana, Arial, sans-serif;
@@ -30,7 +34,8 @@
 }
 		nav li { float: right;
 				 display: inline-block;} 
-		nav li a{display: block;
+		nav li a{
+			display:block;
 			color: white;
 			text-align: center;
 			padding: 14px 16px;
@@ -42,7 +47,7 @@
 }
 
 		footer li a {
-			display: block;
+			display: inline-block;
 			color: white;
 			text-align: center;
 			padding: 14px 200px;
@@ -151,8 +156,36 @@ footer{background-color: black;}
   box-shadow: none !important;
   text-shadow: none !important;
 }
+		.container1{background-image: url(./img/index_background.jpg);
+		             background-repeat: no-repeat;
+		             background-size: 100% 100%;}
+		.container2 {
+            background-color: rgba(255, 255, 255, 0.8);
+            height: 100%;
+        }
 	</style>
 </head>
+<?php
+    $ProductID = $_GET["ID"];
+    $servername = "localhost";
+	$username = "f31ee";
+	$password = "f31ee";
+	$dbname = "f31ee";
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+				}
+    $sql = "SELECT * FROM ShoeInfo WHERE ProductID = ".$ProductID;
+    $result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$name = $row['ProductName'];
+	$price = $row['Price'];
+	$image1 = $row['ImgAddr']."_1.jpg";
+	$image2 = $row['ImgAddr']."_2.jpg";
+	$image3 = $row['ImgAddr']."_3.jpg";
+	$description = $row['Description'];
+
+?>
 <body>
 <div id="wrapper">
 	<header>
@@ -166,10 +199,48 @@ footer{background-color: black;}
 	</nav>
 	<div>
 	<table>
-	<table class="">
-		<tr></tr>
+	<form id="addToCart" action="./script/addToCart.php" method="post">
+	<tr>
+	<?php
+	echo "<td colspan=3 rowspan=4><img src=$image1 width='500px' height='360px' id='large_pic'></td>";
+	echo "<td id='shoeName'><u>$name</u>";
+	echo "<input type='hidden' id='ProductId' name='ProductId' value=$ProductID>";
+	?>
+	</tr>
+	<tr>
+	<?php
+	echo "<td id='discription'>$description</td>";
+	?>
+	</tr>
+	<tr>
+	<?php
+	echo "<td>Price:  SGD <b>$price</b>";
+	?>
+		<br>
+		<br>Size:  <select id="Size" name="Size">  
+					<optgroup>  
+					<option value="35">35</option>  
+					<option value="36">36</option>
+					<option value="37">37</option>  
+					<option value="38">38</option>  
+					<option value="39">39</option>  
+					<option value="40">40</option>  
+					<option value="41">41</option>  
+					<option value="42">42</option>  					
+					</optgroup>  
+					</select></td>
+	</tr>
+	<tr>
+	<td><input class="button" type="submit" value="ADD TO CART"></td>
+	</tr>
+	<tr>
+		<td><img src=<?php echo $image1;?> height='50px' onmouseover=<?php echo "changeImage('$image1');";?>></td>
+		<td><img src=<?php echo $image2;?> height='50px' onmouseover=<?php echo "changeImage('$image2');";?>></td>
+		<td><img src=<?php echo $image3;?> height='50px' onmouseover=<?php echo "changeImage('$image3');";?>></td>
+	</tr>
+	</form>
 	</table>
-	</table>
+
 	</div>
 	<footer>
 	<ul>

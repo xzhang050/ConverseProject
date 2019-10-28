@@ -167,7 +167,7 @@ margin-right: 15px;
 border: 1px solid #333;
 border-radius:1em;
 overflow:hidden; 
-width: 500px;
+width: 300px;
 }
 .table2{
 margin: 15px;
@@ -178,7 +178,7 @@ margin-top: 15px;
 border: 1px solid #333;
 border-radius:1em;
 overflow:hidden; 
-width: 500ox
+width: 600px;
  }
 </style>
 </head>
@@ -201,25 +201,42 @@ width: 500ox
 	<td>
 	<div>
 		<?php
-	session_start();
-	if(!isset($_SESSION['cart']))
-	{
-		$_SESSION['cart'] = array();
+	    session_start();
+		$servername = "localhost";
+	    $username = "f31ee";
+	    $password = "f31ee";
+	    $dbname = "f31ee";
+	    $conn = mysqli_connect($servername, $username, $password, $dbname);
+	    if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+				}
+		if (sizeof($_SESSION['cart'])==0)
+		{echo "<table width='450px' style='margin-left: 40px;'><tr><td><h2>Your shopping cart is empty now.</h2></td></tr></table>";
 		}
 	foreach($_SESSION['cart'] as $key1=>$value1)
 	{
 		$order = $_SESSION['cart'][$key1];
-        $ProductName = $order[1];
-		$size = $order[2];
-		$price = $order[3];
-		$image = $order[4];
-		echo "<table class='table1'><form id='form$key' >";
+		$productId = $order[0];
+		$size = $order[1];
+        $sql = "SELECT * FROM ShoeInfo WHERE ProductID = ".$productId;
+        $result = mysqli_query($conn, $sql);
+	    $row = mysqli_fetch_assoc($result);
+	    $name = $row['ProductName'];
+	    $price = $row['Price'];
+	    $image = $row['ImgAddr']."_1.jpg";
+		echo "<table class='table1'>";
+		echo "<tr><td colspan=2><b>$name</b></td></tr>";
 		echo "<tr>";
-		echo "<td rowspan=4><img src=$image height='70px'></td><td><b>$name</b></td>";
+		echo "<td rowspan=4><img src=$image height='70px'></td>";
 		echo "</tr>";
-		echo "  <tr><td> Price: <b><large>".$price."</large></b></td></tr>";
+		echo "  <tr><td> Price: SGD <b><large>".$price."</large></b></td></tr>";
 		echo "	<tr><td> Size: ".$size."</td></tr>";
-		echo "	<tr><td><input type='button' value='EDIT' class='button'><input type='button' value='REMOVE' class='button' onclick=''></td></tr>";
+		echo "	<tr><td><a href='./edit.php?key={$key1}' style='text-decoration: none;
+		                                                                 font: bold 13px arial, helvetica, sans-serif;
+		                                                                 color: #555;'>EDIT</a>";
+		echo " <a href='./script/remove.php?key={$key1}' style='text-decoration: none;
+		                                                                 font: bold 13px arial, helvetica, sans-serif;
+		                                                                 color: #555;'>REMOVE</a></td></tr>";
 		echo "</table>";
 	}
 	header('location:' . $_SERVER['PHP_SELF'].'?'.SID);
@@ -228,27 +245,35 @@ width: 500ox
          </td>
          <td>
          <div>
-	    <table class="table2">
+
 	    	        <?php
+	    	    if (sizeof($_SESSION['cart'])!=0)
+	    	    {
 	            $total = 0;
                 if(!isset($_SESSION['cart']))
 	                {
 		                $_SESSION['cart'] = array();
 		            }
+
+		        echo "<table class='table2'><tr><td><h2>ORDER SUMMARY</h2></td></tr>";
 	            foreach($_SESSION['cart'] as $key1=>$value1)
 	                {
-		                $order = $_SESSION['cart'][$key1];
-		                $name = $order[1];
-		                $size = $order[2];
-		                $price = $order[3];
+                        $order = $_SESSION['cart'][$key1];
+		                $productId = $order[0];
+		                $size = $order[1];
+                        $sql = "SELECT * FROM ShoeInfo WHERE ProductID = ".$productId;
+                        $result = mysqli_query($conn, $sql);
+	                    $row = mysqli_fetch_assoc($result);
+	                    $name = $row['ProductName'];
+	                    $price = $row['Price'];
 		                $total = $total + $price;
-		                echo "<tr><td>".$name."</td><td>..........</td><td rowspan=2>".$price."</td></tr>";
+		                echo "<tr><td>".$name."</td><td>..........</td><td>".number_format($price,2)."</td></tr>";
 		                echo "<tr><td>".$size."</td></tr>";
 	                }
 	            echo "<tr><td><b><large>Total Price: </td><td></td><td><b><large>".number_format($total,2)."</b></large></td></tr>";
-	            echo"<tr><td colspan=3><form id='checkout' action='checkout.php'><input type='submit' class='button' value='Check Out'></td></tr>";
+	            echo"<tr><td colspan=3><form id='checkout' action='checkout.php'><input type='submit' class='button' value='Check Out'></td></tr></table>";
+	            }
 	        ?>
-	    </table>
 	    	</div>
 	    	        </td>
 	        </tr>
