@@ -13,11 +13,6 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="Z:\public_html\Converse_new\script" />
-    </key>
-  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -41,8 +36,6 @@
       <option name="presentableId" value="Default" />
       <updated>1572174504503</updated>
       <workItem from="1572174524644" duration="48371000" />
-      <workItem from="1572762322439" duration="16323000" />
-      <workItem from="1572778849669" duration="243000" />
     </task>
     <servers />
   </component>

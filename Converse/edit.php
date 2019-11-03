@@ -2,16 +2,8 @@
 <html lang="en">
 <head>
 <title>Converse Online Shop</title>
+<link rel="stylesheet" type="text/css" href="Template.css" />
 	<style>
-		body {font-family:Verdana, Arial, sans-serif;
-              background-color: #ffffff;
-}
-		#wrapper { background-color: #ffffff;
-				   width: 80%;
-		           margin: auto;
-                   min-width:850px;
-		           box-shadow: 10px 10px 5px #888888;
-}
 		 .container1{background-image: url(./img/cart_background.jpg);
 		             background-repeat: no-repeat;
 		             background-size: 100% 100%;}
@@ -19,56 +11,7 @@
             background-color: rgba(255, 255, 255, 0.8);
             height: 100%;
         }
-		header{ background-color: #000000;
-                color: #FFFFFF;
-                font-size: 150%;
-                padding-left:35%;
 
-}
-		nav{background-color: #000000;}
-		ul {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-			overflow: hidden;
-			background-color: #333;
-}
-		nav li { float: right;
-				 display: inline-block;}
-		nav li a{
-			display:block;
-			color: white;
-			text-align: center;
-			padding: 14px 16px;
-			text-decoration: none;}
-		footer {align: center;}
-		footer li {
-			float: center;
-			display:inline-block;
-}
-
-		footer li a {
-			display: inline-block;
-			color: white;
-			text-align: center;
-			padding: 14px 200px;
-			text-decoration: none;
-}
-
-		li a:hover {
-			background-color: #111;
-}
-	    table{
-			padding-top: 50px;
-			padding-bottom: 50px;}
-		a:hover {
-			opacity:0.6;
-}
-a{text-decoration: none;}
-footer{background-color: black;}
-	    img:hover {
-			opacity:0.6;
-}
         #shoeName{
 		font-size: 100;
 		font-family: Comic Sans Ms;
@@ -81,89 +24,6 @@ footer{background-color: black;}
 		padding-top: 5px;
 		height: 80px;
 		}
-		.button::-moz-focus-inner{
-  border: 0;
-  padding: 0;
-}
-
-.button{
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-  padding: 6px 20px;
-  margin: 0;
-  cursor: pointer;
-  border: 1px solid #bbb;
-  overflow: visible;
-  font: bold 13px arial, helvetica, sans-serif;
-  text-decoration: none;
-  white-space: nowrap;
-  color: #555;
-
-  background-color: #ddd;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,1)), to(rgba(255,255,255,0)));
-  background-image: -webkit-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: -moz-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: -ms-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: -o-linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
-  background-image: linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255,0));
-
-  -webkit-transition: background-color .2s ease-out;
-  -moz-transition: background-color .2s ease-out;
-  -ms-transition: background-color .2s ease-out;
-  -o-transition: background-color .2s ease-out;
-  transition: background-color .2s ease-out;
-  background-clip: padding-box; /* Fix bleeding */
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 2px 2px -1px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .3) inset;
-  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 2px 2px -1px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .3) inset;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 2px 2px -1px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .3) inset;
-  text-shadow: 0 1px 0 rgba(255,255,255, .9);
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.button:hover{
-  background-color: #eee;
-  color: #555;
-}
-
-.button:active{
-  background: #e9e9e9;
-  position: relative;
-  top: 1px;
-  text-shadow: none;
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
-}
-
-.button[disabled], .button[disabled]:hover, .button[disabled]:active{
-  border-color: #eaeaea;
-  background: #fafafa;
-  cursor: default;
-  position: static;
-  color: #999;
-  /* Usually, !important should be avoided but here it's really needed :) */
-  -moz-box-shadow: none !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
-		.container1{background-image: url(./img/index_background.jpg);
-		             background-repeat: no-repeat;
-		             background-size: 100% 100%;}
-		.container2 {
-            background-color: rgba(255, 255, 255, 0.8);
-            height: 100%;
-        }
 	</style>
 </head>
 <body>
@@ -222,9 +82,6 @@ footer{background-color: black;}
 					<option value='37'>37</option>
 					<option value='38'>38</option>
 					<option value='39'>39</option>
-					<option value='40'>40</option>
-					<option value='41'>41</option>
-					<option value='42'>42</option>
 					</optgroup>
 					</select></td>
 					<?php echo "<input type='hidden' id='key' name='key' value=$key>" ?>

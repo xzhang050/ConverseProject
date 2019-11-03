@@ -1,0 +1,90 @@
+body {font-family:Verdana, Arial, sans-serif;
+              background-color: #ffffff;
+}
+		#wrapper { background-color: #ffffff;
+				   width: 80%;
+		           margin: auto;
+                   min-width:850px;
+		           box-shadow: 10px 10px 5px #888888;
+}
+		header{ background-color: #000000;
+                color: #FFFFFF;
+                font-size: 150%;
+                padding-left:35%;
+
+}
+		nav{background-color: #000000;}
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #333;
+}
+		nav li { float: right;
+				 display: inline-block;}
+		nav li a{
+			display:block;
+			color: white;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;}
+		footer {align: center;}
+		footer li {
+			float: center;
+			display:inline-block;
+}
+
+		footer li a {
+			display: inline-block;
+			color: white;
+			text-align: center;
+			padding: 14px 200px;
+			text-decoration: none;
+}
+
+		li a:hover {
+			background-color: #111;
+}
+	    table{
+			padding-top: 50px;
+			padding-bottom: 50px;}
+		a:hover {
+			opacity:0.6;
+}
+a{text-decoration: none;}
+footer{background-color: black;}
+	    .imglink:hover {
+			opacity:0.6;
+}
+        #shoeName{
+		font-size: 100;
+		font-family: Comic Sans Ms;
+		padding-top: 10px;
+		font-weight: bold;
+		height: 40px;
+		}
+		#discription{
+		font-family: Comic Sans Ms;
+		padding-top: 5px;
+		height: 80px;
+		}
+.button{
+  border-radius: 25px;
+  padding: 5px 10px 5px 10px;
+  width: 300px;
+  background-color: #191518;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  font-family: sans-serif;
+}
+.button:hover
+{
+    background-color: #555;
+}
+.button:active
+{
+    background-color: #333;
+}
+	</style>
